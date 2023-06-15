@@ -13,9 +13,13 @@ pesquisar.addEventListener('click', () => {
       information: value,
     };
     const dadosASeremPesquisados = JSON.stringify(data);
+
     const fetchAPI = () => {
+
       return new Promise((resolve, reject) => {
+
         fetch('Url_da_api', {
+
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -24,12 +28,14 @@ pesquisar.addEventListener('click', () => {
         })
           .then(response => response.json())
           .then(data => {
+
             if (data.results > 0) {
-              popup.classList.add("ResultsFound")
-              resolve();
-            } else if (data.results === 0) {
               popup.classList.add("NoResultsFound")
-              reject();
+              resolve("Resultados não encontrados");
+            }
+             else if (data.results === 0) {
+              popup.classList.add("ResultsFound")
+              reject("Resultados encontrados");
             }
           })
           .catch(error => {
@@ -39,10 +45,12 @@ pesquisar.addEventListener('click', () => {
     };
 
     fetchAPI()
+
       .then(() => {
         // A promessa foi resolvida
         console.log('Deu certo, existem resultados');
       })
+
       .catch(() => {
         // A promessa foi rejeitada
         console.log('Deu certo, sem resultados');
@@ -65,30 +73,36 @@ for (var i = 0; i < radials.length; i++) {
           input.placeholder = 'Insira o CPF';
           dataType = 'cpf';
           break;
+
         case 'option2':
           input.type = 'number';
           input.placeholder = 'Insira o número de telefone';
           dataType = 'phone_number';
           break;
+
         case 'option3':
           input.type = 'number';
           input.placeholder = 'Insira o número do RG';
           dataType = 'rg';
           break;
+
         case 'option4':
           input.type = 'email';
           input.placeholder = 'Insira o Email';
           dataType = 'email';
           break;
+
         case 'option5':
           input.type = 'url';
           input.placeholder = 'Insira o Site em questão';
           dataType = 'url';
           break;
+
         case 'option6':
           input.placeholder = 'Insira o nome de usuário (@exemplo)';
           dataType = 'username';
           break;
+          
         default:
           break;
       }
