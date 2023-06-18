@@ -2,11 +2,30 @@ const radials = document.getElementsByName('group');
 const inputContainer = document.getElementById('input_container');
 let value = inputContainer.value;
 const popup = document.getElementById('popup');
+const janela = document.getElementById('popup_window');
 const pesquisar = document.getElementById('search');
 let dataType = ''
+const sair = document.getElementById('popup_exit');
 
+function loading(){
+  popup.classList.remove('noResults');
+  popup.classList.remove('resultsFound');
+  popup.classList.add('loading');
+  popup.style.display = 'block';
+
+  let loadAnimation = document.createElement('span');
+  loadAnimation.classList.add('material-symbols-outlined');
+  loadAnimation.innerHTML = 'app_badging'
+  loadAnimation.id = 'loading_wheel';
+  janela.appendChild(loadAnimation)
+}
+
+sair.addEventListener('click', () => {
+  popup.style.display = 'none';
+})
 
 pesquisar.addEventListener('click', () => {
+  loading()
   if (value !== '') {
     let data = {
       type: dataType,
@@ -55,8 +74,6 @@ pesquisar.addEventListener('click', () => {
         // A promessa foi rejeitada
         console.log('Deu certo, sem resultados');
       });
-
-    popup.classList.add('loading');
   }
 });
 
@@ -67,6 +84,7 @@ for (var i = 0; i < radials.length; i++) {
     if (this.checked) {
       var input = document.createElement('input');
       input.type = 'text';
+      input.id = 'textbox';
 
       switch (this.value) {
         case 'option1':
