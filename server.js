@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { Pool } = require('pg');
-const dadosASeremPesquisados = require('./Index');
+const dadosASeremPesquisados = require('./Index') ;
 
 const pool = new Pool({
   user: 'seu_usuario',
