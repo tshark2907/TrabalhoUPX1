@@ -6,6 +6,8 @@ const janela = document.getElementById('popup_window');
 const pesquisar = document.getElementById('search');
 let dataType = ''
 const sair = document.getElementById('popup_exit');
+const disclaimer = document.getElementById('popup_disclaimer');
+const iAgree = document.getElementById('exit_disclaimer')
 
 function loading(){
   janela.classList.remove('noResults');
@@ -84,8 +86,13 @@ function noResults(){
   janela.appendChild(confirmarText);
 }
 
+iAgree.addEventListener('click', () => {
+  disclaimer.style.display = 'none';
+})
+
 sair.addEventListener('click', () => {
   popup.style.display = 'none';
+  loadAnimation.style.display = 'none';
 })
 
 pesquisar.addEventListener('click', () => {
@@ -101,7 +108,7 @@ pesquisar.addEventListener('click', () => {
 
       return new Promise((resolve, reject) => {
 
-        fetch('Url_da_api', {
+        fetch('http://localhost:3000/api/pesquisar', {
 
           method: 'POST',
           headers: {
@@ -149,6 +156,7 @@ for (var i = 0; i < radials.length; i++) {
       var input = document.createElement('input');
       input.type = 'text';
       input.id = 'textbox';
+      pesquisar.style.display = 'inline-block'
 
       switch (this.value) {
         case 'option1':

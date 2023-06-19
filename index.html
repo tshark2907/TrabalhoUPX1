@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina sem título</title>
+    <title>Cata-Fraudes</title>
     <script src="/Index.js" defer></script>
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,9 +16,18 @@
         <h1>Cata fraudes</h1>
         <h2>Insira o dado a ser pesquisado abaixo</h2>
     </header>
+    <div id="popup_disclaimer">
+        <div id="disclaimer_wrapper">
+            <h2>Orientações importantes</h2>
+            <span>É importante relembrar que, caso a pesquisa a ser feita se refira uma empresa, é recomendado pesquisar no Reclame Aqui pelo nome da empresa para evitar possíveis fraudes<br><br>Além disto, evite ao máximo fazer transações via PIX utilizando chaves aleatórias, pois as mesmas não deixam rastros que possam identificar possíveis fraudes.</span>
+            <div id="exit_disclaimer">
+                Estou ciente e quero continuar.
+            </div>
+        </div>
+    </div>
     <form>
         <input type="radio" id="option1" name="group" value="option1">
-            <label id="label1" for="option1">CPF</label>
+            <label id="label1" for="option1">CPF/CNPJ</label>
         <input type="radio" id="option2" name="group" value="option2">
             <label id="label2" for="option2">Número de telefone</label>
         <input type="radio" id="option3" name="group" value="option3">
@@ -34,8 +43,9 @@
     <button id="search">Pesquisar</button>
     <div id="popup">
         <div id="popup_window">
-            <div class="material-symbols-outlined" id="popup_exit"></div>
+            <div class="material-symbols-outlined" id="popup_exit">close</div>
         </div>
     </div>
+    <span id="LGPD_disclaimer">Devido as normas estabelecidas na LGPD, não será possível, em hipótese alguma, o compartilhamento de dados de terceiros para quaisquer propósitos.</span>
 </body>
 </html>

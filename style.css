@@ -87,6 +87,7 @@ form{
     top: 75%;
     left: 50%;
     transform: translate(-50%,-50%);
+    display: none;
 }
 #popup{
     width: 100vw;
@@ -125,26 +126,10 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%,-50%);
-
 color: lightblue;
 }
-
-@keyframes Spinner {
-    25%{
-        transform: rotateX(90deg);
-    }
-    50%{
-        transform: rotateX(180deg);
-    }
-    75%{
-        transform: rotateX(270deg);
-    }
-    100%{
-        transform: rotateX(360deg);
-    }
-}
 .noResults{
-    border: 1px solid green;
+    border: 10px solid green;
 }
 #check{
     position: absolute;
@@ -162,7 +147,7 @@ color: lightblue;
     transform: translate(-50%,-50%);
 }
 .loading{
-    border: 1px solid lightseagreen;
+    border: 3px solid lightseagreen;
 }
 #popup_exit{
     display: flex;
@@ -192,7 +177,7 @@ color: lightblue;
     top: 60%;
     left: 50%;
     transform: translate(-50%,-50%);
-    text-align:center;
+    text-align:justify;
 }
 #check{
     position: absolute;
@@ -204,10 +189,68 @@ color: lightblue;
 .check_texto{
     font-size: 1.5rem;
     position: absolute;
-    text-align: center;
+    text-align: justify;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     color: lightseagreen;
 }
-
+#LGPD_disclaimer{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: justify;
+}
+#popup_disclaimer{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+    display: block;
+}
+#disclaimer_wrapper{
+    width: 70%;
+    height: 70%;
+    background-color: white;
+    z-index: 4;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+}
+#disclaimer_wrapper span{
+    font-size: 1.1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: justify;
+}
+#disclaimer_wrapper h2{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+#exit_disclaimer{
+    background-color: black;
+    font-size: 1.3rem;
+    color: white;
+    display: inline;
+    width: 50%;
+    height: 10%;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}

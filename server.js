@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
 const { Pool } = require('pg');
-const dadosASeremPesquisados = require('./Index') ;
+
 
 const pool = new Pool({
-  user: 'seu_usuario',
-  host: 'seu_host',
-  database: 'seu_banco_de_dados',
-  password: 'sua_senha',
+  user: 'postgres',
+  host: 'localhost',
+  database: 'dados',
+  password: '1234',
   port: 5432, // porta padrão do PostgreSQL
 });
 
@@ -29,7 +29,7 @@ app.post('/api/pesquisar', (req, res) => {
 
   const query = `
   SELECT COUNT(*) as results
-  FROM sua_tabela
+  FROM DadosSalvos
   WHERE informacao = '${value}' AND tipo = '${dataType}',
   `;
 
