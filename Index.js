@@ -15,7 +15,6 @@ function loading(){
   janela.classList.add('loading');
   popup.style.display = 'block';
 
-
   const existingElement = document.getElementById('loading_wheel');
 
 if (!existingElement) {
@@ -30,9 +29,9 @@ if (!existingElement) {
   function rotateLoadingIcon(){
   rotationAngle += 1;
   loadAnimation.style.transform = `rotate(${rotationAngle}deg) scale(5)`;
-}
+    }
   setInterval(rotateLoadingIcon,10);
-}
+  }
 }
 
 function resultsFound(){
