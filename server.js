@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const { Pool } = require('pg');
 
-
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -25,15 +24,15 @@ app.post('/api/pesquisar', (req, res) => {
     information: value,
   };
 
-  dadosASeremPesquisados = JSON.stringify(data);
+  const dadosASeremPesquisados = JSON.stringify(data);
 
   const query = `
-  SELECT COUNT(*) as results
-  FROM DadosSalvos
-  WHERE informacao = '${value}' AND tipo = '${dataType}',
+    SELECT COUNT(*) AS results
+    FROM DadosSalvos
+    WHERE informacao = '${value}' AND tipo = '${dataType}'
   `;
 
-  pool.query(query, [value])
+  pool.query(query, [value, dataType])
     .then(result => {
       const rowCount = result.rows[0].results;
       if (rowCount > 0) {
