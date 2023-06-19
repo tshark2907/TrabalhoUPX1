@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { Pool } = require('pg');
-import dadosASeremPesquisados from './Index';
+const dadosASeremPesquisados = require('./Index');
 
 const pool = new Pool({
   user: 'seu_usuario',
@@ -25,12 +25,12 @@ app.post('/api/pesquisar', (req, res) => {
     information: value,
   };
 
-  const dadosASeremPesquisados = JSON.stringify(data);
+  dadosASeremPesquisados = JSON.stringify(data);
 
   const query = `
-    SELECT COUNT(*) as results
-    FROM sua_tabela
-    WHERE informacao = $1
+  SELECT COUNT(*) as results
+  FROM sua_tabela
+  WHERE informacao = '${value}' AND tipo = '${dataType}',
   `;
 
   pool.query(query, [value])

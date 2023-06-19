@@ -8,16 +8,80 @@ let dataType = ''
 const sair = document.getElementById('popup_exit');
 
 function loading(){
-  popup.classList.remove('noResults');
-  popup.classList.remove('resultsFound');
-  popup.classList.add('loading');
+  janela.classList.remove('noResults');
+  janela.classList.remove('resultsFound');
+  janela.classList.add('loading');
   popup.style.display = 'block';
 
-  let loadAnimation = document.createElement('span');
+  const loadAnimation = document.createElement('span');
   loadAnimation.classList.add('material-symbols-outlined');
   loadAnimation.innerHTML = 'app_badging'
   loadAnimation.id = 'loading_wheel';
   janela.appendChild(loadAnimation)
+
+  let rotationAngle = 0;
+
+  function rotateLoadingIcon(){
+  rotationAngle += 1;
+  loadAnimation.style.transform = `rotate(${rotationAngle}deg) scale(5)`;
+}
+  setInterval(rotateLoadingIcon,10);
+}
+
+function resultsFound(){
+  const elementoARemover = document.getElementById('loading_wheel');
+  elementoARemover.style.display = 'none';
+
+  janela.classList.remove('noResults');
+  janela.classList.remove('loading');
+  janela.classList.add('resultsFound');
+  popup.style.display = 'block';
+
+  let alerta = document.createElement('span');
+  alerta.classList.add('material-symbols-outlined');
+  alerta.innerHTML = 'warning';
+  alerta.id = 'alerta';
+
+  let alertaTitle = document.createElement('h2');
+  alertaTitle.classList.add('alerta_titulo');
+  alertaTitle.innerHTML = "Alerta!";
+
+  let alertaText = document.createElement('span');
+  alertaText.classList.add('alerta_texto');
+  alertaText.innerHTML = `O dado inserido foi encontrado no banco de dados como suspeito de 
+  fraudes, é recomendado não prosseguir com transações utilizando este dado. No caso de 
+  duvidas, entre em contato com a Polícia Civil.`;
+
+  janela.appendChild(alertaText);
+  janela.appendChild(alertaTitle);
+  janela.appendChild(alerta);
+}
+
+function noResults(){
+  const elementoARemover = document.getElementById('loading_wheel');
+  elementoARemover.style.display = 'none';
+
+  janela.classList.remove('resultsFound');
+  janela.classList.remove('loading');
+  janela.classList.add('noResults');
+  popup.style.display = 'block';
+
+  let confirmar = document.createElement('span');
+  confirmar.classList.add('material-symbols-outlined');
+  confirmar.innerHTML = 'task_alt';
+  confirmar.id = 'check';
+
+  let confirmarTitle = document.createElement('h2');
+  confirmarTitle.classList.add('check_titulo');
+  confirmarTitle.innerHTML = "Confirmado!";
+
+  let confirmarText = document.createElement('span');
+  confirmarText.classList.add('check_texto');
+  confirmarText.innerHTML = `O dado inserido não foi encontrado no banco de dados.`;
+
+  janela.appendChild(confirmar);
+  janela.appendChild(confirmarTitle);
+  janela.appendChild(confirmarText);
 }
 
 sair.addEventListener('click', () => {
@@ -25,7 +89,7 @@ sair.addEventListener('click', () => {
 })
 
 pesquisar.addEventListener('click', () => {
-  loading()
+  loading();
   if (value !== '') {
     let data = {
       type: dataType,
@@ -49,12 +113,12 @@ pesquisar.addEventListener('click', () => {
           .then(data => {
 
             if (data.results > 0) {
-              popup.classList.add("NoResultsFound")
-              resolve("Resultados não encontrados");
+              resultsFound();
+              reject("Resultados encontrados");
             }
              else if (data.results === 0) {
-              popup.classList.add("ResultsFound")
-              reject("Resultados encontrados");
+              noResults();
+              resolve("Resultados não encontrados");
             }
           })
           .catch(error => {
