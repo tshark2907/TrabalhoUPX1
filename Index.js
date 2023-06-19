@@ -15,11 +15,15 @@ function loading(){
   janela.classList.add('loading');
   popup.style.display = 'block';
 
+
+  const existingElement = document.getElementById('loading_wheel');
+
+if (!existingElement) {
   const loadAnimation = document.createElement('span');
   loadAnimation.classList.add('material-symbols-outlined');
-  loadAnimation.innerHTML = 'app_badging'
+  loadAnimation.innerHTML = 'progress_activity';
   loadAnimation.id = 'loading_wheel';
-  janela.appendChild(loadAnimation)
+  janela.appendChild(loadAnimation);
 
   let rotationAngle = 0;
 
@@ -28,6 +32,7 @@ function loading(){
   loadAnimation.style.transform = `rotate(${rotationAngle}deg) scale(5)`;
 }
   setInterval(rotateLoadingIcon,10);
+}
 }
 
 function resultsFound(){
