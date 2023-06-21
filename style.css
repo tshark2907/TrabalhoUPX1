@@ -69,6 +69,66 @@ form{
     grid-column: 6;
     grid-row: 2;
 }
+@media(max-width: 767px){
+    form{
+        display: grid;
+        grid-template-columns: 40px 150px 40px 150px;
+        grid-template-rows: 30px 30px 30px;
+        grid-row-gap :20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    #option1{
+        grid-column: 1;
+        grid-row: 1;
+    }
+    #label1{
+        grid-column: 2;
+        grid-row: 1;
+    }
+    #option2{
+        grid-column: 3;
+        grid-row: 1;
+    }
+    #label2{
+        grid-column: 4;
+        grid-row: 1;
+    }
+    #option3{
+        grid-column: 1;
+        grid-row: 2;
+    }
+    #label3{
+        grid-column: 2;
+        grid-row: 2;
+    }
+    #option4{
+        grid-column: 3;
+        grid-row: 2;
+    }
+    #label4{
+        grid-column: 4;
+        grid-row: 2;
+    }
+    #option5{
+        grid-column: 1;
+        grid-row: 3;
+    }
+    #label5{
+        grid-column: 2;
+        grid-row: 3;
+    }
+    #option6{
+        grid-column: 3;
+        grid-row: 3;
+    }
+    #label6{
+        grid-column: 4;
+        grid-row: 3;
+    }
+}
 #input_container{
     position: absolute;
     top: 65%;
