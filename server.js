@@ -1,16 +1,20 @@
 const express = require('express');
 const app = express();
 const { Pool } = require('pg');
+const cors = require('cors');
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'dados',
-  password: '1234',
-  port: 5432, // porta padrão do PostgreSQL
+  "label": "Dados Salvos",
+  "host": "localhost",
+  "user": "postgres",
+  "port": 5432,
+  "ssl": false,
+  "database": "DadosSalvos",
+  "password": "1234" // porta padrão do PostgreSQL
 });
 
 app.use(express.json());
+app.use(cors());
 
 app.post('/api/pesquisar', (req, res) => {
   const { value, dataType } = req.body;
@@ -27,10 +31,48 @@ app.post('/api/pesquisar', (req, res) => {
   const dadosASeremPesquisados = JSON.stringify(data);
 
   const query = `
-    SELECT COUNT(*) AS results
-    FROM DadosSalvos
-    WHERE informacao = '${value}' AND tipo = '${dataType}'
-  `;
+  SELECT
+  'id' AS ${dataType},
+  COUNT(*) FILTER (WHERE "id" LIKE '%' || ${value} || '%') AS results
+FROM
+  "DadosSalvos.public.dados"
+UNION ALL
+SELECT
+  'cpf_cnpj' AS ${dataType},
+  COUNT(*) FILTER (WHERE "cpf_cnpj" LIKE '%' || ${value} || '%') AS results
+FROM
+  "DadosSalvos.public.dados"
+UNION ALL
+SELECT
+  'email' AS ${dataType},
+  COUNT(*) FILTER (WHERE "email" LIKE '%' ||  ${value}  || '%') AS results
+FROM
+  "DadosSalvos.public.dados"
+UNION ALL
+SELECT
+  'username' AS ${dataType},
+  COUNT(*) FILTER (WHERE "username" LIKE '%' || ${value} || '%') AS results
+FROM
+  "DadosSalvos.public.dados"
+UNION ALL
+SELECT
+  'phonenumber' AS ${dataType},
+  COUNT(*) FILTER (WHERE "phonenumber" LIKE '%' || ${value} || '%') AS results
+FROM
+  "DadosSalvos.public.dados"
+UNION ALL
+SELECT
+  'rg' AS ${dataType},
+  COUNT(*) FILTER (WHERE "rg" LIKE '%' || ${value} || '%') AS results
+FROM
+  "DadosSalvos.public.dados"
+UNION ALL
+SELECT
+  'url' AS ${dataType},
+  COUNT(*) FILTER (WHERE "url" LIKE '%' || ${value} || '%') AS results
+FROM
+  "DadosSalvos.public.dados";
+`;
 
   pool.query(query, [value, dataType])
     .then(result => {
@@ -38,7 +80,9 @@ app.post('/api/pesquisar', (req, res) => {
       if (rowCount > 0) {
         res.json({ results: rowCount });
       } else {
-        res.status(404).json({ error: 'Nenhum resultado encontrado.' });
+        res.status(404).json({
+          results: rowCount,
+          error: 'Nenhum resultado encontrado.' });
       }
     })
     .catch(error => {

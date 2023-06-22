@@ -1,10 +1,10 @@
 const radials = document.getElementsByName('group');
 const inputContainer = document.getElementById('input_container');
-let value = inputContainer.value;
 const popup = document.getElementById('popup');
 const janela = document.getElementById('popup_window');
 const pesquisar = document.getElementById('search');
-let dataType = ''
+const caixaDeTexto = document.getElementById('textbox');
+let dataType = '';
 const sair = document.getElementById('popup_exit');
 const disclaimer = document.getElementById('popup_disclaimer');
 const iAgree = document.getElementById('exit_disclaimer')
@@ -101,26 +101,30 @@ sair.addEventListener('click', () => {
 
 pesquisar.addEventListener('click', () => {
   loading();
-  if (value !== '') {
+
+  let conteudo = input.value;
+
+  if (caixaDeTexto !== '') {
     let data = {
       type: dataType,
-      information: value,
+      information:conteudo,
     };
     const dadosASeremPesquisados = JSON.stringify(data);
+
+    console.log(dadosASeremPesquisados)
 
     const fetchAPI = () => {
 
       return new Promise((resolve, reject) => {
 
         fetch('http://localhost:3000/api/pesquisar', {
-
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: dadosASeremPesquisados
+          body: JSON.stringify({ value: conteudo, dataType: dataType})
         })
-          .then(response => response.json())
+          .then(res => res.json())
           .then(data => {
 
             if (data.results > 0) {
@@ -152,12 +156,14 @@ pesquisar.addEventListener('click', () => {
   }
 });
 
+let input;
+
 for (var i = 0; i < radials.length; i++) {
   radials[i].addEventListener('change', function() {
     inputContainer.innerHTML = '';
 
     if (this.checked) {
-      var input = document.createElement('input');
+      input = document.createElement('input');
       input.type = 'text';
       input.id = 'textbox';
       pesquisar.style.display = 'inline-block'
@@ -165,13 +171,13 @@ for (var i = 0; i < radials.length; i++) {
       switch (this.value) {
         case 'option1':
           input.placeholder = 'Insira o CPF';
-          dataType = 'cpf';
+          dataType = 'cpf_cnpj';
           break;
 
         case 'option2':
           input.type = 'number';
           input.placeholder = 'Insira o número de telefone';
-          dataType = 'phone_number';
+          dataType = 'phonenumber';
           break;
 
         case 'option3':
