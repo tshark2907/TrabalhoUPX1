@@ -5,11 +5,8 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "esm": "^3.2.25",
     "express": "^4.18.2",
-    "google-spreadsheet": "^3.3.0",
-    "openssl": "^9.5.1",
-    "pg": "^8.11.0"
+    "google-spreadsheet": "^3.3.0"
   },
   "scripts": {
     "start": "node newserver.mjs"
