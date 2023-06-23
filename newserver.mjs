@@ -9,7 +9,7 @@ const doc = new GoogleSpreadsheet('1a5OYgWSDOSjFEwNXa9MtCXngBPdoAJ8l8V4Xe_hDdtY'
 app.use(express.json());
 app.use(cors());
 
-app.get('http://localhost:3000/resultado', async (req, res) => {
+app.get('/resultado', async (req, res) => {
   const { value } = req.query;
 
   if (!value) {
