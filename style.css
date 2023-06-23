@@ -73,6 +73,9 @@ form{
     body{
         font-size: 0.8rem;
     }
+    #popup_disclaimer{
+        font-size: 0.7rem;
+    }
     form{
         display: grid;
         grid-template-columns: 40px 150px 40px 150px;
