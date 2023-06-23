@@ -70,6 +70,9 @@ form{
     grid-row: 2;
 }
 @media(max-width: 767px){
+    body{
+        font-size: 0.8rem;
+    }
     form{
         display: grid;
         grid-template-columns: 40px 150px 40px 150px;
