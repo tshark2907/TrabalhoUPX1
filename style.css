@@ -197,6 +197,9 @@ color: lightblue;
 .noResults{
     border: 10px solid green;
 }
+.resultsFound{
+    border: 10px solid red;
+}
 #check{
     position: absolute;
     top: 50%;

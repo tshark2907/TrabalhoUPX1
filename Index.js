@@ -16,8 +16,6 @@ function loading(){
   popup.style.display = 'block';
 
   const existingElement = document.getElementById('loading_wheel');
-
-if (!existingElement) {
   const loadAnimation = document.createElement('span');
   loadAnimation.classList.add('material-symbols-outlined');
   loadAnimation.innerHTML = 'progress_activity';
@@ -32,12 +30,10 @@ if (!existingElement) {
     }
   setInterval(rotateLoadingIcon,10);
   }
-}
+
 
 function resultsFound(){
-  const elementoARemover = document.getElementById('loading_wheel');
-  elementoARemover.style.display = 'none';
-
+  janela.querySelector('#loading_wheel').remove();
   janela.classList.remove('noResults');
   janela.classList.remove('loading');
   janela.classList.add('resultsFound');
@@ -64,9 +60,7 @@ function resultsFound(){
 }
 
 function noResults(){
-  const elementoARemover = document.getElementById('loading_wheel');
-  elementoARemover.style.display = 'none';
-
+  janela.querySelector('#loading_wheel').remove();
   janela.classList.remove('resultsFound');
   janela.classList.remove('loading');
   janela.classList.add('noResults');
@@ -93,11 +87,17 @@ function noResults(){
 iAgree.addEventListener('click', () => {
   disclaimer.style.display = 'none';
 })
-
 sair.addEventListener('click', () => {
+  const elementsToRemove = janela.querySelectorAll('.alerta_texto, .alerta_titulo, .check_texto, .check_titulo, #alerta, #check');
+  elementsToRemove.forEach(element => {
+    janela.removeChild(element);
+  });
+
+  janela.classList.remove('resultsFound');
+  janela.classList.remove('noResults');
   popup.style.display = 'none';
-  loadAnimation.style.display = 'none';
-})
+});
+
 
 pesquisar.addEventListener('click', () => {
   loading();
@@ -105,56 +105,13 @@ pesquisar.addEventListener('click', () => {
   let conteudo = input.value;
 
   if (caixaDeTexto !== '') {
-    let data = {
-      type: dataType,
-      information:conteudo,
-    };
-    const dadosASeremPesquisados = JSON.stringify(data);
-
-    console.log(dadosASeremPesquisados)
-
-    const fetchAPI = () => {
-
-      return new Promise((resolve, reject) => {
-
-        fetch('https://catafraudes.netlify.app/.netlify/functions/server', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ value: conteudo, dataType: dataType})
-        })
-          .then(res => res.json())
-          .then(data => {
-
-            if (data.results > 0) {
-              resultsFound();
-              reject("Resultados encontrados");
-            }
-             else if (data.results === 0) {
-              noResults();
-              resolve("Resultados não encontrados");
-            }
-          })
-          .catch(error => {
-            console.error('Erro ao enviar dados para a API:', error);
-          });
-      });
-    };
-
-    fetchAPI()
-
-      .then(() => {
-        // A promessa foi resolvida
-        console.log('Deu certo, existem resultados');
-      })
-
-      .catch(() => {
-        // A promessa foi rejeitada
-        console.log('Deu certo, sem resultados');
-      });
-  }
-});
+      if(conteudo === '@usuario'){
+      setTimeout(resultsFound,5000)
+        }else{
+          setTimeout(noResults,5000)
+        }
+      }
+    })
 
 let input;
 
