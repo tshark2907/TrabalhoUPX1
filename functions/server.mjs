@@ -42,7 +42,7 @@ readSpreadsheetData();
 app.use(json());
 app.use(cors());
 
-app.post('https://catafraudes.netlify.app/.netlify/functions/server', async (req, res) => {
+app.post('', async (req, res) => {
 
   try {
     console.log('API conectada. Carregando a planilha...');
