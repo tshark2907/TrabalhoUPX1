@@ -9,13 +9,13 @@
     "google-spreadsheet": "^3.3.0"
   },
   "scripts": {
-    "start": "node newserver.mjs"
+    "start": "functions/node server.mjs"
   },
   "name": "trabalhodafaculdade",
   "description": "Trabalho sendo desenvolvido para a faculdade Newton Paiva, Curso ADS, Primeira UPX",
   "version": "1.0.0",
   "type": "module",
-  "main": "newindex.js",
+  "main": "index.js",
   "keywords": [],
   "author": "Thiago Alvarenga",
   "license": "ISC"

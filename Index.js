@@ -1,4 +1,4 @@
-const radials = document.getElementsByName('group');
+git rebase -i const radials = document.getElementsByName('group');
 const inputContainer = document.getElementById('input_container');
 const popup = document.getElementById('popup');
 const janela = document.getElementById('popup_window');
