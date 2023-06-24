@@ -117,7 +117,7 @@ pesquisar.addEventListener('click', () => {
 
       return new Promise((resolve, reject) => {
 
-        fetch('http://localhost:3000/api/pesquisar', {
+        fetch('https://catafraudes.netlify.app/.netlify/functions/server', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -210,7 +210,3 @@ for (var i = 0; i < radials.length; i++) {
     }
   });
 }
-
-
-
-a
